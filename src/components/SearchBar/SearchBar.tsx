@@ -34,7 +34,7 @@ export const SearchBar = ({ onSubmit }: SearchBarProps) => {
           <button className={styles.button} type="submit">
             Search
           </button>
-          <FormikError name="query" component="div" className={styles.error} />
+          <FormikError name="query" component="div" className={styles.errorr} />
         </Form>
       )}
     </Formik>

@@ -57,3 +57,7 @@
 .button:hover {
   background-color: #004182;
 }
+.errorr {
+  display: flex;
+  align-items: center;
+}
