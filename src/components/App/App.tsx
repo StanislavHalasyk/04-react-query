@@ -22,7 +22,7 @@ export default function App() {
     queryKey: ["movies", query, page],
     queryFn: () => fetchMovies(query, page),
     enabled: query !== "",
-    placeholderData: keepPreviousData, //  щоб не було "блимань"
+    placeholderData: keepPreviousData, //
   });
 
   const movies = useMemo(() => data?.results ?? [], [data?.results]);
@@ -36,6 +36,7 @@ export default function App() {
   const handlePageChange = (selected: { selected: number }) => {
     setPage(selected.selected + 1);
   };
+  // Тости через useEffect
   useEffect(() => {
     if (!isLoading && !isError && query && movies.length === 0) {
       toast.error("No movies found for your request.");

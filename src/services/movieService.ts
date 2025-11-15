@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import * as yup from "yup";
 
 interface TMDbMoviesResponse {
-  results: Movie[]; // <<< ВИПРАВЛЕНО: використовує імпортований тип
+  results: Movie[];
   total_results: number;
   total_pages: number;
 }
@@ -19,7 +19,6 @@ interface TMDbErrorResponse {
   status_code?: number;
 }
 
-// --- Yup-схеми ---
 const movieSchema = yup.object({
   id: yup.number().required(),
   title: yup.string().required(),

@@ -33,6 +33,7 @@ export const MovieModal = ({ movie, onClose }: MovieModalProps) => {
     if (e.target === e.currentTarget) onClose();
   };
 
+  // Вибираємо картинку за пріоритетом: backdrop → poster → placeholder
   const imageSrc = movie.backdrop_path
     ? `${BACKDROP_URL}${movie.backdrop_path}`
     : movie.poster_path
