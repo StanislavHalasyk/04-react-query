@@ -3,15 +3,7 @@ import axios, { AxiosError } from "axios";
 import * as yup from "yup";
 
 interface TMDbMoviesResponse {
-  results: Array<{
-    id: number;
-    title: string;
-    overview?: string | null;
-    release_date?: string | null;
-    poster_path?: string | null;
-    backdrop_path?: string | null;
-    vote_average?: number | null;
-  }>;
+  results: Movie[]; // <<< ВИПРАВЛЕНО: використовує імпортований тип
   total_results: number;
   total_pages: number;
 }
@@ -68,13 +60,11 @@ export async function fetchMovies(
       },
     });
 
-    // Валідація структури відповіді через Yup
     const validatedData = (await moviesResponseSchema.validate(res.data, {
       abortEarly: false,
       stripUnknown: true,
     })) as yup.InferType<typeof moviesResponseSchema>;
 
-    // Нормалізація даних під тип Movie
     const normalizedResults: Movie[] = validatedData.results.map((m) => ({
       id: m.id,
       title: m.title,
@@ -88,7 +78,7 @@ export async function fetchMovies(
     return {
       results: normalizedResults,
       total_results: validatedData.total_results,
-      total_pages: Math.min(validatedData.total_pages, 500), // TMDB максимум 500
+      total_pages: Math.min(validatedData.total_pages, 500),
     };
   } catch (error: unknown) {
     if (axios.isAxiosError(error)) {
